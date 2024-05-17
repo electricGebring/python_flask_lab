@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superheroes List</title>
+</head>
+<body>
+    <h1>Superheroes</h1>
+    <ul>
+        {% for superhero in superheroes %}
+            <li>{{ superhero }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/submit_superheroes">Add Superhero</a>
+</body>
+</html>
