@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, redirect, url_for, render_template, request
 from datetime import datetime
+from pymongo import MongoClient
 
 import json
 
@@ -34,6 +35,7 @@ def superheroes():
     data = read_json()
     return render_template('list.html', superheroes=data['superheroes'])
 
+
 @app.route('/submit_superheroes', methods=['GET', 'POST'])
 def submit_superheroes():
     if request.method == 'POST':
@@ -45,6 +47,19 @@ def submit_superheroes():
         return redirect("/superheroes")
     else:
         return render_template('submit.html')
+
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['bananDb']
+collection = db['bananFilm']
+
+
+@app.route('/film', methods=['GET'])
+def get_documents():
+    documents = list(collection.find())
+    for document in documents:
+        document['_id'] = str(document['_id'])  # Convert ObjectId to string for JSON serialization
+    return jsonify(documents), 200
 
 
 if __name__ == '__main__':
