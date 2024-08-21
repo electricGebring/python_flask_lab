@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, redirect, url_for, render_template, request
 from datetime import datetime
 from pymongo import MongoClient
+import os
 
 import json
 
@@ -48,8 +49,10 @@ def submit_superheroes():
     else:
         return render_template('submit.html')
 
+MONGO_URI = os.environ.get('MONGO_URI') or 'mongodb://localhost:27017/bananDb'
+print(MONGO_URI)
+client = MongoClient(MONGO_URI)
 
-client = MongoClient('mongodb://host.docker.internal:27017/')
 db = client['bananDb']
 collection = db['bananFilm']
 
@@ -63,6 +66,6 @@ def get_documents():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True, port=8000, host='0.0.0.0')
 
 

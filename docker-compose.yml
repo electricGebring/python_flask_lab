@@ -5,13 +5,13 @@ services:
     build: .
     container_name: python_flask_lab
     ports:
-      - "8000:5000"  # Maps the host's port 8000 to the container's port 8000
+      - "8000:8000"  # Maps the host's port 8000 to the container's port 8000
     volumes:
       - .:/app  # Mounts the current directory into the container
     depends_on:
       - mongo  # Ensures MongoDB starts before the web service
-    # environment:
-      #- MONGO_URI=mongodb://mongo:27017/bananDb  # Set the MongoDB URI environment variable
+    environment:
+      - MONGO_URI=mongodb://host.docker.internal:27017/bananDb  # Set the MongoDB URI environment variable
 
   mongo:
     image: mongo:6.0
