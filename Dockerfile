@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 8000 available to the world outside this container (if you run a web server)
-EXPOSE 8000
+EXPOSE 5000
 
 # Run the Python application (replace app.py with your application entry point)
 CMD ["python", "app.py"]

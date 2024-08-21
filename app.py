@@ -49,7 +49,7 @@ def submit_superheroes():
         return render_template('submit.html')
 
 
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://host.docker.internal:27017/')
 db = client['bananDb']
 collection = db['bananFilm']
 
@@ -63,6 +63,6 @@ def get_documents():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000, host='0.0.0.0')
 
 
