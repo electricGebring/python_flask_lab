@@ -19,7 +19,7 @@ services:
     ports:
       - "27017:27017"  # Maps the host's port 27017 to the container's port 27017
     volumes:
-      - mongo-data:/data/db  # Persists MongoDB data between container restarts
+      - ./mongobackup:/mongobackup # Persists MongoDB data between container restarts
 
 volumes:
   mongo-data:  # Creates a named volume for MongoDB data persistence
